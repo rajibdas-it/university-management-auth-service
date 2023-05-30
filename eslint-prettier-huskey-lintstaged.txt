@@ -93,3 +93,16 @@ yarn add -D eslint-config-prettier
     "es2021": true
   }
 }
+
+
+###################### Heskey Installation ##########################
+1. yarn add husky --dev
+2. yarn husky install (z Banglad kore lok dekhte parserOptions)
+3. yarn husky add .husky/pre-commit "npm test"
+4. create a huskey it with <yarn lint:check>
+
+
+###################### Lint-Stage Installation ##########################
+1. yarn add --save-dev lint-staged 
+2. script er vitore likhte hobe: "lint-prettier": "yarn lint:check && yarn prettier:check",
+3. "lint-staged": {"src/**/*.ts":"yarn lint-prettier"}, //license er pore eita add kore dibo
