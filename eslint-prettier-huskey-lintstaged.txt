@@ -1,0 +1,95 @@
+########## Integrating Islint
+# Step 1:
+// tsconfig.json (ts config file e include and exclude add korte hobe)
+{
+  "compilerOptions": {
+  },
+  
+  "include": ["src"], // which files to compile
+  "exclude": ["node_modules"], // which files to skip
+}
+
+# setp 2:
+# For npm:
+npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev
+
+# For Yarn:
+yarn add eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev
+
+# Step 3:
+# .eslintrc name ekta file khulte hobe root e..sekhane nicher code ta dite hobe:
+// .eslintrc
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module",
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    // to enforce using type for object type definitions, can be type or interface 
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"], 
+  },
+
+  # Step:4:
+  go to package.json where right under scripts,
+script{
+        "lint": "eslint --ext .js,.ts .",
+}
+
+# Step:5:
+create .eslintignore file for ignore node_modules, dist, .env
+# Step:6:
+In // package.json write under scripts
+  "scripts": {
+    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts ."
+   },
+
+# Step:6
+in json.package
+"lint:fix":"esling --fix"
+
+
+2# Integrating Prettier
+1. yarn add -D prettier
+2. create .prettier file and write these 3 lines  {
+  "semi": false,
+  "singleQuote": true,
+  "arrowParens": "avoid" 
+}
+3.  "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+4. set if not set in settings.json check mandatory
+// settings.json
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  ...
+}
+
+# sepcial setup:
+eslint and prettier er moddhe jeno kono conflict na lage er jonno
+yarn add -D eslint-config-prettier
+// .eslintrc ei page e ei code ta bosay dibo. ager code change hoye jabe
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module",
+  },
+  "plugins": ["@typescript-eslint"],
+  // HERE
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+  },
+
+  "env": {
+    "browser": true,
+    "es2021": true
+  }
+}
