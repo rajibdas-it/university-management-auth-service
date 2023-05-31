@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // basic routing
-app.get('/createuser', (req: Request, res: Response) => {
+app.get('/createuser', (req: Request, res: any) => {
   res.send('Link ok')
 })
 export default app
