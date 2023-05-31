@@ -33,6 +33,7 @@ yarn add eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --sav
     // to enforce using type for object type definitions, can be type or interface 
     "@typescript-eslint/consistent-type-definitions": ["error", "type"], 
   },
+}
 
   # Step:4:
   go to package.json where right under scripts,
