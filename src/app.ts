@@ -13,4 +13,5 @@ app.use(express.urlencoded({ extended: true }))
 
 // basic routing
 app.use('/api/v1/user/', userRoute)
+
 export default app

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import app from './app'
 import { database_url, port } from './config'
+import { errorlogger, logger } from './shared/logger'
 
 const dbConnection = async () => {
   try {
@@ -8,12 +9,12 @@ const dbConnection = async () => {
     // console.log(database_url);
     // await mongoose.connect("mongodb://127.0.0.1:27017/university-management"); //local device connection
     await mongoose.connect(database_url as string) //connect mongodb atlas
-    console.log('Database Connected Successfully')
+    logger.info('Database Connected Successfully')
     app.listen(port, () => {
-      console.log(`Server running on port ${port}`)
+      logger.info(`Server running on port ${port}`)
     })
   } catch (error) {
-    console.log('Failed to connected database', error)
+    errorlogger.error('Failed to connected database', error)
   }
 }
 
