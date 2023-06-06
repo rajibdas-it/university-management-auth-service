@@ -1,0 +1,1 @@
+2023-06-06T18:47:52.633Z [right meow!] error: Failed to connected database The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
