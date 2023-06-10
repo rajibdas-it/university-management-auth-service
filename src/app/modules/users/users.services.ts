@@ -1,4 +1,5 @@
 import { default_password } from '../../../config'
+import ApiError from '../../../errors/ApiErrors'
 import { IUsers } from './users.interface'
 import User from './users.model'
 import { generateUserID } from './users.utilz'
@@ -14,7 +15,7 @@ export const createUserService = async (
 
   const createdUser = await User.create(user)
   if (!createdUser) {
-    throw new Error('Failed to create user')
+    throw new ApiError(400, 'Failed to create user')
   }
   return createdUser
 }
