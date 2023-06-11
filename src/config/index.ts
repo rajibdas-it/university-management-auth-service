@@ -5,6 +5,9 @@ import path from 'path'
 dotenv.config({ path: path.join(process.cwd(), '.env') })
 
 // eslint-disable-next-line no-undef
+export const env = process.env.NODE_ENV
+
+// eslint-disable-next-line no-undef
 export const port = Number(process.env.PORT) as number
 // eslint-disable-next-line no-undef
 export const database_url = process.env.DATABASE_URL
