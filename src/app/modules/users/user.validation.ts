@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod';
 
 export const createUserZodSchema = z.object({
   body: z.object({
@@ -7,6 +7,6 @@ export const createUserZodSchema = z.object({
     }),
     password: z.string().optional(),
   }),
-})
+});
 
 // await createUserZodSchema.parseAsync(req)
