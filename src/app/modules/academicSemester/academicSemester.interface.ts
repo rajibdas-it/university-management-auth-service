@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 
-type Month =
+export type IAcademicSemesterMonths =
   | 'January'
   | 'February'
   | 'March'
@@ -14,12 +14,15 @@ type Month =
   | 'November'
   | 'December';
 
+export type IAcademicSemesterTitle = 'Autumn' | 'Summer' | 'Fall';
+export type ISemesterCode = '01' | '02' | '03';
+
 export type IAcademicSemester = {
-  title: 'Autumn' | 'Summer' | 'Fall';
+  title: IAcademicSemesterTitle;
   year: number;
-  code: '01' | '02' | '03';
-  startMonth: Month;
-  endMonth: Month;
+  code: ISemesterCode;
+  startMonth: IAcademicSemesterMonths;
+  endMonth: IAcademicSemesterMonths;
 };
 
 export type AcademicModel = Model<IAcademicSemester, Record<string, unknown>>;
