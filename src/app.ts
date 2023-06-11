@@ -1,7 +1,9 @@
-import express, { Application } from 'express'
+import express, { Application, NextFunction } from 'express'
 import cors from 'cors'
-import userRoute from './app/modules/users/users.route'
 import globalErrorHandler from './app/middlewares/globalErrorHandler'
+import { userRoutes } from './app/modules/users/user.route'
+
+//import ApiError from './errors/ApiErrors'
 
 const app: Application = express()
 
@@ -12,11 +14,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // basic routing
-app.use('/api/v1/user/', userRoute)
+app.use('/api/v1/user/', userRoutes)
 
-// app.get('/', (req: Request, res: Response, next: NextFunction) => {
-//   // throw new Error('Error khaisi')
-//   next('Error Khaisi')
+// app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+//   throw new Error('Testing')
 // })
 
 //global error handler
