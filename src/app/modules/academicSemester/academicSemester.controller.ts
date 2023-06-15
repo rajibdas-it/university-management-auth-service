@@ -11,7 +11,7 @@ export const createSemesterController: RequestHandler = async (
     // console.log(req.body);
 
     const result = await createSemesterServices(academicSemesterData);
-    res.send(200).json({
+    res.status(200).json({
       success: true,
       data: result,
       message: 'Academic semester is created successfully',
