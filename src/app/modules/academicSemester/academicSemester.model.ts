@@ -1,3 +1,4 @@
+import ApiError from '../../../errors/ApiErrors';
 import {
   academicSemesterCode,
   academicSemesterMonths,
@@ -5,6 +6,7 @@ import {
 } from './academicSemester.constant';
 import { AcademicModel, IAcademicSemester } from './academicSemester.interface';
 import { Schema, model } from 'mongoose';
+import status from 'http-status';
 
 const academicSemesterSchema = new Schema<IAcademicSemester>(
   {
@@ -16,6 +18,17 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
   },
   { timestamps: true }
 );
+
+academicSemesterSchema.pre('save', async function (next) {
+  const isExist = await academicSemester.findOne({
+    title: this.title,
+    year: this.year,
+  });
+  if (isExist) {
+    throw new ApiError(status.CONFLICT, 'Academic semester is already exist');
+  }
+  next();
+});
 
 const academicSemester = model<IAcademicSemester, AcademicModel>(
   'academicSemester',
