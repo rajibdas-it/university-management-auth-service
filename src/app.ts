@@ -1,8 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
-import { userRoutes } from './app/modules/users/user.route';
-import { semesterRoutes } from './app/modules/academicSemester/academicSemester.route';
+import routes from './app/routes';
 
 //import ApiError from './errors/ApiErrors'
 
@@ -15,8 +14,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // basic routing
-app.use('/api/v1/user/', userRoutes);
-app.use('/api/v1/semester', semesterRoutes);
+// app.use('/api/v1/user/', userRoutes);
+// app.use('/api/v1/semester', semesterRoutes);
+
+app.use('/api/v1/', routes);
 
 // app.get('/', async (req: Request, res: Response, next: NextFunction) => {
 //   throw new Error('Testing')
