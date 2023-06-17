@@ -7,6 +7,7 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import pick from '../../../shared/pick';
 import { paginationFields } from '../../../constants/pagination';
+import { academicSemesterFilterableField } from './academicSemester.constant';
 
 export const createSemesterController = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -26,7 +27,7 @@ export const createSemesterController = catchAsync(
 
 export const getAllSemesterController = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const filters = pick(req.query, ['searchTerm']);
+    const filters = pick(req.query, academicSemesterFilterableField);
     const paginationOptions = pick(req.query, paginationFields);
     // console.log(paginationOptions);
     const result = await getAllSemestersServices(filters, paginationOptions);

@@ -1,6 +1,9 @@
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiErrors';
-import { academicSemesterTitleCodeMapper } from './academicSemester.constant';
+import {
+  academicSemesterSearchableField,
+  academicSemesterTitleCodeMapper,
+} from './academicSemester.constant';
 import {
   IAcademicSemester,
   IAcademicSemesterFilter,
@@ -10,7 +13,6 @@ import { IPaginationOptions } from '../../../interfaces/pagination';
 import { IGenericResponse } from '../../../interfaces/common';
 import { calculatePagination } from '../../../helper/paginationHelper';
 import { SortOrder } from 'mongoose';
-import { servicesVersion } from 'typescript';
 
 export const createSemesterServices = async (
   payload: IAcademicSemester
@@ -27,9 +29,9 @@ export const getAllSemestersServices = async (
   filters: IAcademicSemesterFilter,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<IAcademicSemester[]>> => {
-  const { searchTerm } = filters;
+  const { searchTerm, ...filtersData } = filters;
   const andConditions = [];
-  const academicSemesterSearchableField = ['title', 'code', 'year'];
+
   if (searchTerm) {
     andConditions.push({
       $or: academicSemesterSearchableField.map(field => ({
@@ -37,6 +39,14 @@ export const getAllSemestersServices = async (
           $regex: searchTerm,
           $options: 'i',
         },
+      })),
+    });
+  }
+
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
       })),
     });
   }
@@ -73,10 +83,12 @@ export const getAllSemestersServices = async (
   if (sortBy && sortOrder) {
     sortConditions[sortBy] = sortOrder;
   }
-  const result = await academicSemester
-    .find({ $and: andConditions })
-    .sort(sortConditions)
 
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {};
+  const result = await academicSemester
+    .find(whereConditions)
+    .sort(sortConditions)
     .skip(skip)
     .limit(limit);
   const total = await academicSemester.countDocuments();
