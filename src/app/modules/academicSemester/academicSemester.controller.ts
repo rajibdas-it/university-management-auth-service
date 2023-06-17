@@ -2,12 +2,14 @@ import { NextFunction, Request, Response } from 'express';
 import {
   createSemesterServices,
   getAllSemestersServices,
+  getSingleSemesterServices,
 } from './academicSemester.services';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import pick from '../../../shared/pick';
 import { paginationFields } from '../../../constants/pagination';
 import { academicSemesterFilterableField } from './academicSemester.constant';
+import httpStatus from 'http-status';
 
 export const createSemesterController = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -39,5 +41,18 @@ export const getAllSemesterController = catchAsync(
       data: result.data,
     });
     next();
+  }
+);
+
+export const getSingleSemesterController = catchAsync(
+  async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const result = await getSingleSemesterServices(id);
+    res.status(httpStatus.OK).json({
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Semester retrive successfully',
+      data: result,
+    });
   }
 );

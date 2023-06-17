@@ -6,6 +6,7 @@ import ApiError from '../../errors/ApiErrors';
 import { errorlogger } from '../../shared/logger';
 import { ZodError } from 'zod';
 import handleZodErrorHandler from '../../errors/handleZodErrorHandler';
+import handleCastError from '../../errors/handleCastError';
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   // eslint-disable-next-line no-unused-expressions
@@ -28,6 +29,12 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
     statusCode = simplifiedError?.statusCode;
     message = simplifiedError?.message;
     errorMessages = simplifiedError?.errorMessages;
+  } else if (error?.name === 'CastError') {
+    // res.status(200).json({ error });
+    const simplifiedError = handleCastError(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessages;
   } else if (error instanceof ApiError) {
     statusCode = error.statusCode;
     message = error.message;

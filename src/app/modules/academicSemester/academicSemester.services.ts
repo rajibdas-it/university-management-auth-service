@@ -101,3 +101,10 @@ export const getAllSemestersServices = async (
     data: result,
   };
 };
+
+export const getSingleSemesterServices = async (
+  id: string
+): Promise<IAcademicSemester | null> => {
+  const result = await academicSemester.findById(id);
+  return result;
+};
