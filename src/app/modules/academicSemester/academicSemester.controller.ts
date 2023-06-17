@@ -9,12 +9,12 @@ export const createSemesterController = catchAsync(
     // console.log(req.body);
 
     const result = await createSemesterServices(academicSemesterData);
-    next();
     sendResponse(res, {
       statusCode: 200,
       success: true,
       message: 'academic semester created successfully',
       data: result,
     });
+    next();
   }
 );
