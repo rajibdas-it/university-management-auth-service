@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import {
   createSemesterServices,
+  deleteSemesterServices,
   getAllSemestersServices,
   getSingleSemesterServices,
   updateAcademicSemesterServices,
@@ -12,6 +13,7 @@ import { paginationFields } from '../../../constants/pagination';
 import { academicSemesterFilterableField } from './academicSemester.constant';
 import httpStatus from 'http-status';
 import { IAcademicSemester } from './academicSemester.interface';
+import academicSemester from './academicSemester.model';
 
 export const createSemesterController = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -29,7 +31,7 @@ export const createSemesterController = catchAsync(
 );
 
 export const getAllSemesterController = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response) => {
     const filters = pick(req.query, academicSemesterFilterableField);
     const paginationOptions = pick(req.query, paginationFields);
     // console.log(paginationOptions);
@@ -60,9 +62,7 @@ export const getSingleSemesterController = catchAsync(
 export const updateSemesterController = catchAsync(
   async (req: Request, res: Response) => {
     const id = req.params.id;
-    // console.log(id);
     const updatedData = req.body;
-    // console.log(updatedData);
     const result = await updateAcademicSemesterServices(id, updatedData);
     sendResponse(res, {
       statusCode: 200,
@@ -72,3 +72,14 @@ export const updateSemesterController = catchAsync(
     });
   }
 );
+
+export const deleteSemesterController = catchAsync(async (req, res) => {
+  const id = req.query.id;
+  const result = await deleteSemesterServices(id);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Semester deleted successfully',
+    data: result,
+  });
+});
