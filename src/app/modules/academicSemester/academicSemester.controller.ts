@@ -3,6 +3,7 @@ import {
   createSemesterServices,
   getAllSemestersServices,
   getSingleSemesterServices,
+  updateAcademicSemesterServices,
 } from './academicSemester.services';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
@@ -10,6 +11,7 @@ import pick from '../../../shared/pick';
 import { paginationFields } from '../../../constants/pagination';
 import { academicSemesterFilterableField } from './academicSemester.constant';
 import httpStatus from 'http-status';
+import { IAcademicSemester } from './academicSemester.interface';
 
 export const createSemesterController = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -23,7 +25,6 @@ export const createSemesterController = catchAsync(
       message: 'academic semester created successfully',
       data: result,
     });
-    next();
   }
 );
 
@@ -40,7 +41,6 @@ export const getAllSemesterController = catchAsync(
       meta: result.meta,
       data: result.data,
     });
-    next();
   }
 );
 
@@ -52,6 +52,22 @@ export const getSingleSemesterController = catchAsync(
       statusCode: httpStatus.OK,
       success: true,
       message: 'Semester retrive successfully',
+      data: result,
+    });
+  }
+);
+
+export const updateSemesterController = catchAsync(
+  async (req: Request, res: Response) => {
+    const id = req.params.id;
+    // console.log(id);
+    const updatedData = req.body;
+    // console.log(updatedData);
+    const result = await updateAcademicSemesterServices(id, updatedData);
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: 'Semester updated successfully',
       data: result,
     });
   }
