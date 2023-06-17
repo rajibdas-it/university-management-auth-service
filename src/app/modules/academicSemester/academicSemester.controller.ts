@@ -26,22 +26,16 @@ export const createSemesterController = catchAsync(
 
 export const getAllSemesterController = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    // const paginationOptions = {
-    //   page: Number(req.query.page),
-    //   limit: Number(req.query.limit),
-    //   sortBy: req.query.sortBy,
-    //   sortOrder: req.query.sortOrder,
-    // };
-
     const paginationOptions = pick(req.query, paginationFields);
-    console.log(paginationOptions);
-    // const result = await getAllSemestersServices(paginationOptions);
-    // sendResponse(res, {
-    //   statusCode: 200,
-    //   success: true,
-    //   message: 'Semester retrived successfully',
-    //   data: result,
-    // });
-    // next();
+    // console.log(paginationOptions);
+    const result = await getAllSemestersServices(paginationOptions);
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: 'Semester retrived successfully',
+      meta: result.meta,
+      data: result.data,
+    });
+    next();
   }
 );
