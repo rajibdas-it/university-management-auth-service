@@ -26,9 +26,10 @@ export const createSemesterController = catchAsync(
 
 export const getAllSemesterController = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    const filters = pick(req.query, ['searchTerm']);
     const paginationOptions = pick(req.query, paginationFields);
     // console.log(paginationOptions);
-    const result = await getAllSemestersServices(paginationOptions);
+    const result = await getAllSemestersServices(filters, paginationOptions);
     sendResponse(res, {
       statusCode: 200,
       success: true,
