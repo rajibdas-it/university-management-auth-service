@@ -1,7 +1,8 @@
 import { Schema, model } from 'mongoose';
 import { string } from 'zod';
+import { IStudent, StudentModel } from './student.interface';
 
-const studentSchema = new Schema<IStudent, StudentModel>(
+export const studentSchema = new Schema<IStudent, StudentModel>(
   {
     id: {
       type: String,
