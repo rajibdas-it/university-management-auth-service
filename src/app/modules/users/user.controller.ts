@@ -5,8 +5,8 @@ import sendResponse from '../../../shared/sendResponse';
 
 export const createUserController = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { ...user } = req.body;
-    const result = await createUserService(user);
+    const { ...userData } = req.body;
+    const result = await createUserService(userData);
 
     sendResponse(res, {
       statusCode: 200,
