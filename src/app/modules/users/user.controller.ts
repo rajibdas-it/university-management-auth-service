@@ -1,12 +1,13 @@
-import { NextFunction, Request, Response } from 'express';
-import { createUserService } from './user.services';
+import { Request, Response } from 'express';
+import { createStudentService } from './user.services';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 
-export const createUserController = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { ...userData } = req.body;
-    const result = await createUserService(userData);
+export const createStudentController = catchAsync(
+  async (req: Request, res: Response) => {
+    const { student, ...userData } = req.body;
+
+    const result = await createStudentService(student, userData);
 
     sendResponse(res, {
       statusCode: 200,
@@ -14,6 +15,5 @@ export const createUserController = catchAsync(
       message: 'user created successfully',
       data: result,
     });
-    next();
   }
 );

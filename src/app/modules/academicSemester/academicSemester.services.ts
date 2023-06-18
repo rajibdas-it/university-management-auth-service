@@ -8,7 +8,7 @@ import {
   IAcademicSemester,
   IAcademicSemesterFilter,
 } from './academicSemester.interface';
-import academicSemester from './academicSemester.model';
+import AcademicSemester from './academicSemester.model';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import { IGenericResponse } from '../../../interfaces/common';
 import { calculatePagination } from '../../../helper/paginationHelper';
@@ -21,7 +21,7 @@ export const createSemesterServices = async (
     throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid semester code');
   }
 
-  const result = await academicSemester.create(payload);
+  const result = await AcademicSemester.create(payload);
   return result;
 };
 
@@ -86,12 +86,11 @@ export const getAllSemestersServices = async (
 
   const whereConditions =
     andConditions.length > 0 ? { $and: andConditions } : {};
-  const result = await academicSemester
-    .find(whereConditions)
+  const result = await AcademicSemester.find(whereConditions)
     .sort(sortConditions)
     .skip(skip)
     .limit(limit);
-  const total = await academicSemester.countDocuments();
+  const total = await AcademicSemester.countDocuments();
   return {
     meta: {
       page,
@@ -105,7 +104,7 @@ export const getAllSemestersServices = async (
 export const getSingleSemesterServices = async (
   id: string
 ): Promise<IAcademicSemester | null> => {
-  const result = await academicSemester.findById(id);
+  const result = await AcademicSemester.findById(id);
   return result;
 };
 
@@ -120,7 +119,7 @@ export const updateAcademicSemesterServices = async (
   ) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid semester code');
   }
-  const result = await academicSemester.findOneAndUpdate({ _id: id }, payload, {
+  const result = await AcademicSemester.findOneAndUpdate({ _id: id }, payload, {
     new: true,
   });
   return result;
@@ -129,6 +128,6 @@ export const updateAcademicSemesterServices = async (
 export const deleteSemesterServices = async (
   id: string
 ): Promise<IAcademicSemester | null> => {
-  const result = await academicSemester.findByIdAndDelete(id);
+  const result = await AcademicSemester.findByIdAndDelete(id);
   return result;
 };

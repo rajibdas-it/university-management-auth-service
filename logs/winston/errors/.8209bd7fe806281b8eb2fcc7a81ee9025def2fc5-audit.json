@@ -59,6 +59,36 @@
             "date": 1687025028621,
             "name": "C:\\Users\\engrr\\OneDrive\\Desktop\\university-management\\university-management-auth-service\\logs\\winston\\errors\\phu-18-06-2023-00-error.log",
             "hash": "d0fdd2c7b92ac2e44f441a5f98167ea2ffa694dea47b7f6c8efae95a957b3de5"
+        },
+        {
+            "date": 1687096596535,
+            "name": "C:\\Users\\engrr\\OneDrive\\Desktop\\university-management\\university-management-auth-service\\logs\\winston\\errors\\phu-18-06-2023-19-error.log",
+            "hash": "4d58fe7f28670609a6fefa062e433109c50c27d98b0b101979357fd4cb323738"
+        },
+        {
+            "date": 1687097145744,
+            "name": "C:\\Users\\engrr\\OneDrive\\Desktop\\university-management\\university-management-auth-service\\logs\\winston\\errors\\phu-18-06-2023-20-error.log",
+            "hash": "9b291be347ec3405c29895d94dd2a7661073ea9a1f346b983ea3aff49324e539"
+        },
+        {
+            "date": 1687100422009,
+            "name": "C:\\Users\\engrr\\OneDrive\\Desktop\\university-management\\university-management-auth-service\\logs\\winston\\errors\\phu-18-06-2023-21-error.log",
+            "hash": "27e730ccf8eaa1ef6aacfcb861188e42647d01b7ecea24794355d46f05398ce1"
+        },
+        {
+            "date": 1687104734478,
+            "name": "C:\\Users\\engrr\\OneDrive\\Desktop\\university-management\\university-management-auth-service\\logs\\winston\\errors\\phu-18-06-2023-22-error.log",
+            "hash": "4803048731ee2476091e2c08902c4be624d0dab0cb569e2c6fa043a4d05296e8"
+        },
+        {
+            "date": 1687113608433,
+            "name": "C:\\Users\\engrr\\OneDrive\\Desktop\\university-management\\university-management-auth-service\\logs\\winston\\errors\\phu-19-06-2023-00-error.log",
+            "hash": "2c7b74ec6e86881d2d79115b956284bc201f82f9b4c39d854fbc3361223eaff8"
+        },
+        {
+            "date": 1687114814011,
+            "name": "C:\\Users\\engrr\\OneDrive\\Desktop\\university-management\\university-management-auth-service\\logs\\winston\\errors\\phu-19-06-2023-01-error.log",
+            "hash": "a1f7cf998b2ae02e65e8bf00ba0a72ab8825f05390b601cfce689e862767fb6c"
         }
     ],
     "hashType": "sha256"

@@ -1,79 +1,47 @@
-import { InferSchemaType, Model } from "mongoose";
-import { studentSchema } from "./student.model";
+import { Model, Types } from 'mongoose';
+import { IAcademicSemester } from '../academicSemester/academicSemester.interface';
+import { IAcademicDepartment } from '../academicDepartment/academicDepartment.interfaces';
+import { IAcademicFaculty } from '../academicFaculty/academicFaculty.interfaces';
 
-export type IStudent = InferSchemaType(typeof studentSchema)
+export type IUserName = {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+};
 
-export type StudentModel = Model<IStudent, Record<string,unknown>>
-// export type IStudent = {
-//   id: string;
-//   name: {
-//     type: {
-//       fristName: { type: String; required: true };
-//       middleName: { type: String };
-//       lastName: { type: String; required: true };
-//     };
-//     required: true;
-//   };
-//   dateOfBirth: string;
-//   gender: 'male' | 'female';
-//   bloodGroup: {
-//     type: String;
-//     enum: ['A+', 'A-', 'O+', 'O-', 'AB+', 'AB-', 'B+', 'B-'];
-//     required: true;
-//   };
-//   email: {
-//     type: String;
-//     unique: true;
-//     required: true;
-//   };
-//   contactNo: {
-//     type: string;
-//     required: true;
-//     unique: true;
-//   };
-//   emergencyContactNo: {
-//     type: string;
-//     required: true;
-//   };
-//   presentAddress: {
-//     type: String;
-//     required: true;
-//   };
-//   permanentAddress: {
-//     type: String;
-//     required: true;
-//   };
-//   guardian: {
-//     required: true;
-//     type: {
-//       fatherName: { type: String; required: true };
-//       fatherOccupation: { type: String; required: true };
-//       fatherContactNo: { type: String; required: true };
-//       motherName: { type: String; required: true };
-//       motherOccupation: { type: String; required: true };
-//       motherContactNo: { type: String; required: true };
-//       address: { type: String; required: true };
-//     };
-//   };
-//   localGuardian: {
-//     required: true;
-//     type: {
-//       name: { type: String; required: true };
-//       occupation: { type: String; required: true };
-//       contactNo: { type: String; required: true };
-//       address: { type: String; required: true };
-//     };
-//   };
-//   academicSemester: {
-//     type: Schema.Types.ObjectId;
-//     ref: 'academicSemester';
-//   };
-//   academicDepartment: {
-//     type: Schema.Types.ObjectId;
-//     ref: 'AcademicDepartment';
-//   };
-//   academicFaculty: {
-//     type: Schema.Types.ObjectId;
-//     ref: 'AcademicFaculty';
-//   };
-// };
+export type IGuardian = {
+  fatherName: string;
+  fatherOccupation: string;
+  fatherContactNo: string;
+  motherName: string;
+  motherOccupation: string;
+  motherContactNo: string;
+  address: string;
+};
+
+export type ILocalGuardian = {
+  name: string;
+  occupation: string;
+  contactNo: string;
+  address: string;
+};
+export type IStudent = {
+  id: string;
+  name: IUserName;
+  dateOfBirth: string;
+  gender: 'male' | 'female';
+  bloodGroup?: 'A+' | 'A-' | 'O+' | 'O-' | 'AB+' | 'AB-' | 'B+' | 'B-';
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  presentAddress: string;
+  permanentAddress: string;
+  guardian: IGuardian;
+  localGuardian: ILocalGuardian;
+  academicSemester: Types.ObjectId | IAcademicSemester;
+  academicDepartment: Types.ObjectId | IAcademicDepartment;
+  academicFaculty: Types.ObjectId | IAcademicFaculty;
+  profileImage?: string;
+};
+
+export type StudentModel = Model<IStudent, Record<string, unknown>>;

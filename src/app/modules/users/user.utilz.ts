@@ -11,13 +11,13 @@ export const findLastStudentId = async () => {
 };
 
 export const generateStudentId = async (
-  academicSemeter: IAcademicSemester
-): Promise<string | undefined> => {
+  academicSemeter: IAcademicSemester | null
+): Promise<string> => {
   const currentId =
     (await findLastStudentId()) || (0).toString().padStart(5, '0'); //ei line ta jodi database kono id thake tahole seta dibe ar jodi na thake tahole 00000 eita dibe. er upor amra calculation korbo
   let incrementedId = (parseInt(currentId) + 1).toString().padStart(5, '0');
-  incrementedId = `${academicSemeter.year.substring(2)}${
-    academicSemeter.code
+  incrementedId = `${academicSemeter?.year.substring(2)}${
+    academicSemeter?.code
   }${incrementedId}`;
 
   return incrementedId;

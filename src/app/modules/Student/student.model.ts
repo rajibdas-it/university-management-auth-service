@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { string } from 'zod';
+
 import { IStudent, StudentModel } from './student.interface';
+import { bloodGroup, gender } from './student.constant';
 
 export const studentSchema = new Schema<IStudent, StudentModel>(
   {
@@ -11,7 +12,7 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
     },
     name: {
       type: {
-        fristName: { type: String, required: true },
+        firstName: { type: String, required: true },
         middleName: { type: String },
         lastName: { type: String, required: true },
       },
@@ -23,12 +24,11 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
     },
     gender: {
       type: String,
-      enum: ['male', 'female'],
+      enum: gender,
     },
     bloodGroup: {
       type: String,
-      enum: ['A+', 'A-', 'O+', 'O-', 'AB+', 'AB-', 'B+', 'B-'],
-      required: true,
+      enum: bloodGroup,
     },
     email: {
       type: String,
@@ -36,12 +36,11 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
       required: true,
     },
     contactNo: {
-      type: string,
+      type: String,
       required: true,
-      unique: true,
     },
     emergencyContactNo: {
-      type: string,
+      type: String,
       required: true,
     },
     presentAddress: {
@@ -75,7 +74,7 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
     },
     academicSemester: {
       type: Schema.Types.ObjectId,
-      ref: 'academicSemester',
+      ref: 'AcademicSemester',
     },
     academicDepartment: {
       type: Schema.Types.ObjectId,
@@ -84,6 +83,9 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
     academicFaculty: {
       type: Schema.Types.ObjectId,
       ref: 'AcademicFaculty',
+    },
+    profileImage: {
+      type: String,
     },
   },
   {
@@ -95,3 +97,5 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
 );
 
 const Student = model('Student', studentSchema);
+
+export default Student;

@@ -13,7 +13,7 @@ import { paginationFields } from '../../../constants/pagination';
 import { academicSemesterFilterableField } from './academicSemester.constant';
 import httpStatus from 'http-status';
 import { IAcademicSemester } from './academicSemester.interface';
-import academicSemester from './academicSemester.model';
+import AcademicSemester from './academicSemester.model';
 import { string } from 'zod';
 
 export const createSemesterController = catchAsync(
