@@ -8,7 +8,7 @@ import { ZodError } from 'zod';
 import handleZodErrorHandler from '../../errors/handleZodErrorHandler';
 import handleCastError from '../../errors/handleCastError';
 
-const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
+const globalErrorHandler: ErrorRequestHandler = (error, req, res) => {
   // eslint-disable-next-line no-unused-expressions
   env === 'development'
     ? // eslint-disable-next-line no-console
@@ -54,8 +54,6 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
     errorMessages,
     stack: env !== 'production' ? error?.stack : undefined,
   });
-
-  next();
 };
 
 export default globalErrorHandler;
