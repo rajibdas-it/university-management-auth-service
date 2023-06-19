@@ -5,7 +5,7 @@ const userSchema = new Schema<IUsers>(
   {
     id: { type: String, required: true, unique: true },
     role: { type: String, required: true },
-    password: { type: String, required: true },
+    password: { type: String },
     student: {
       type: Schema.Types.ObjectId,
       ref: 'Student',

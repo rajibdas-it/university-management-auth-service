@@ -33,7 +33,7 @@ export const createStudentService = async (
   try {
     session.startTransaction();
     const id = await generateStudentId(academicSemester);
-    console.log(id);
+    // console.log('from user service page', id);
     user.id = id;
     student.id = id;
 
@@ -48,6 +48,8 @@ export const createStudentService = async (
     if (!newUser.length) {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create new user');
     }
+
+    // console.log(newUser);
     newUserAllData = newUser[0];
 
     await session.commitTransaction();

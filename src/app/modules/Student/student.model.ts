@@ -20,7 +20,6 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
     },
     dateOfBirth: {
       type: String,
-      required: true,
     },
     gender: {
       type: String,
@@ -96,6 +95,6 @@ export const studentSchema = new Schema<IStudent, StudentModel>(
   }
 );
 
-const Student = model('Student', studentSchema);
+const Student = model<IStudent, StudentModel>('Student', studentSchema);
 
 export default Student;

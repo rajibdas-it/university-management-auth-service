@@ -57,6 +57,15 @@ export const createUserZodSchema = z.object({
         }),
       }),
       profileImage: z.string().optional(),
+      academicSemester: z.string({
+        required_error: 'academic semester is required',
+      }),
+      academicDepartment: z.string({
+        required_error: 'academic department is required',
+      }),
+      academicFaculty: z.string({
+        required_error: 'academic faculty is required',
+      }),
     }),
   }),
 });
